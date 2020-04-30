@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="save">Save</string>
+    <string name="example_age">40</string>
+    <string name="icon">icon</string>
+    <string name="slash">/</string>
+    <string name="zero">0</string>
+    <string name="quantity_of_steps">Quantity of steps</string>
+    <string name="weight">Weight</string>
+    <string name="tachycardia">Tachycardia</string>
+    <string name="pulse">Pulse</string>
+    <string name="blood_pressure">Blood pressure</string>
+    <string name="recording_lifedata">Recording lifedata</string>
+    <string name="recording_blood_pressure_data">Recording blood pressure data</string>
+    <string name="age">Age:</string>
+    <string name="second_name">Second name</string>
+    <string name="name">Name</string>
+    <string name="surname">Surname</string>
+    <string name="user_name">User name:</string>
+    <string name="title">Complex health monitoring system</string>
+    <string name="data_saved">Data saved</string>
+</resources>

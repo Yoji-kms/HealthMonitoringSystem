@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RecordingBloodPressureDataActivity">
+
+    <TextView
+        android:id="@+id/titleTextViewId"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:background="@color/design_default_color_background"
+        android:backgroundTint="@color/colorPrimary"
+        android:paddingStart="16sp"
+        android:paddingEnd="0sp"
+        android:text="@string/title"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@color/design_default_color_background"
+        android:backgroundTint="@color/colorPrimary"
+        android:contentDescription="@string/icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
+
+    <Button
+        android:id="@+id/recordingBloodPressureButtonId"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="8dp"
+        android:background="@android:drawable/btn_default"
+        android:backgroundTint="@android:color/darker_gray"
+        android:clickable="false"
+        android:text="@string/recording_blood_pressure_data"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/recordingLifedataButtonId"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleTextViewId" />
+
+    <Button
+        android:id="@+id/recordingLifedataButtonId"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="8dp"
+        android:background="@android:drawable/btn_default"
+        android:backgroundTint="@color/ic_launcher_background"
+        android:text="@string/recording_lifedata"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleTextViewId" />
+
+    <Button
+        android:id="@+id/saveBloodPressureDataButtonId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="72sp"
+        android:background="@android:drawable/progress_horizontal"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="@string/save"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/bloodPressureTextViewId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/blood_pressure"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recordingBloodPressureButtonId" />
+
+    <TextView
+        android:id="@+id/pulseTextViewId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/pulse"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bloodPressureTextViewId" />
+
+    <TextView
+        android:id="@+id/tachycardiaTextViewId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/tachycardia"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pulseTextViewId" />
+
+    <TextView
+        android:id="@+id/slashTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/slash"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/systolicPressureEditTextId"
+        app:layout_constraintTop_toBottomOf="@+id/recordingLifedataButtonId" />
+
+    <EditText
+        android:id="@+id/systolicPressureEditTextId"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="112dp"
+        android:ems="10"
+        android:hint="@string/zero"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recordingLifedataButtonId" />
+
+    <EditText
+        android:id="@+id/diastolicPressureEditTextId"
+        android:layout_width="40sp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="64dp"
+        android:ems="10"
+        android:hint="@string/zero"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/slashTextView"
+        app:layout_constraintTop_toBottomOf="@+id/recordingLifedataButtonId" />
+
+    <EditText
+        android:id="@+id/pulseEditTextId"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="92dp"
+        android:ems="10"
+        android:hint="@string/zero"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/systolicPressureEditTextId" />
+
+    <CheckBox
+        android:id="@+id/tachycardiaCheckBoxId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="120dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pulseEditTextId" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

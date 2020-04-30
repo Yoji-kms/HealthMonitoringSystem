@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="save">Сохранить</string>
+    <string name="title">Комплексная система мониторинга здоровья</string>
+    <string name="user_name">ФИО:</string>
+    <string name="surname">Фамилия</string>
+    <string name="name">Имя</string>
+    <string name="second_name">Отчество</string>
+    <string name="age">Возраст:</string>
+    <string name="example_age">40</string>
+    <string name="icon">icon</string>
+    <string name="recording_blood_pressure_data">Запись показателей давления</string>
+    <string name="recording_lifedata">Запись жизненных показателей</string>
+    <string name="blood_pressure">Давление</string>
+    <string name="pulse">Пульс</string>
+    <string name="tachycardia">Тахикардия</string>
+    <string name="slash">/</string>
+    <string name="zero">0</string>
+    <string name="weight">Вес</string>
+    <string name="quantity_of_steps">Количество шагов</string>
+    <string name="data_saved">Данные сохранены</string>
+</resources>
