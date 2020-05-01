@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +24,29 @@ import java.util.Date;
 public class RecordingLifedataActivity extends AppCompatActivity {
 
     private static long userId;
+    private EditText weightEditText;
+    private EditText quantityOfStepsEditText;
+    private Button saveButton;
+    private UserDBHelper dbHelper;
+    private SQLiteDatabase db;
+
+    private TextWatcher textWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            String weight = weightEditText.getText().toString().trim();
+            String quantityOfSteps = quantityOfStepsEditText.getText().toString().trim();
+
+            saveButton.setEnabled(!weight.isEmpty() && !quantityOfSteps.isEmpty());
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+        }
+    };
 
     public static void setUserId(long userId) {
         RecordingLifedataActivity.userId = userId;
@@ -32,8 +57,22 @@ public class RecordingLifedataActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recording_lifedata);
 
+        initViews ();
+        initDbHelper();
         recordingBloodPressureDataButtonInit();
         saveButtonAction();
+    }
+
+    public void initViews(){
+        weightEditText = findViewById(R.id.weightEditTextId);
+        quantityOfStepsEditText = findViewById(R.id.quantityOfStepsEditTextId);
+
+        weightEditText.addTextChangedListener(textWatcher);
+        quantityOfStepsEditText.addTextChangedListener(textWatcher);
+    }
+
+    public void initDbHelper (){
+        dbHelper = new UserDBHelper(RecordingLifedataActivity.this);
     }
 
     public void recordingBloodPressureDataButtonInit() {
@@ -50,14 +89,13 @@ public class RecordingLifedataActivity extends AppCompatActivity {
     }
 
     public void saveButtonAction(){
-        Button saveButton = findViewById(R.id.saveLifedataButtonId);
+        saveButton = findViewById(R.id.saveLifedataButtonId);
+
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final String LOG_TAG = "Logs";
                 Log.i(LOG_TAG, "Нажата кнопка \"Сохранить\" на экране записи жизненных показателей");
-                EditText weightEditText = findViewById(R.id.weightEditTextId);
-                EditText quantityOfStepsEditText = findViewById(R.id.quantityOfStepsEditTextId);
 
                 int weight = Integer.parseInt(weightEditText.getText().toString());
                 int quantityOfSteps = Integer.parseInt(quantityOfStepsEditText.getText().toString());
@@ -68,20 +106,16 @@ public class RecordingLifedataActivity extends AppCompatActivity {
                 weightEditText.setText("");
                 quantityOfStepsEditText.setText("");
 
-                UserDBHelper dbHelper = new UserDBHelper(RecordingLifedataActivity.this);
-                SQLiteDatabase db = dbHelper.getWritableDatabase();
-
+                db = dbHelper.getWritableDatabase();
                 ContentValues values = new ContentValues();
                 values.put(LifedataEntry.USER_ID, userId);
                 values.put(LifedataEntry.COLUMN_NAME_WEIGHT, weight);
                 values.put(LifedataEntry.COLUMN_NAME_QUANTITY_OF_STEPS, quantityOfSteps);
                 values.put(LifedataEntry.COLUMN_NAME_DATE_AND_TIME, String.valueOf(currentTime));
-
                 db.insert(LifedataEntry.TABLE_NAME, null, values);
                 db.close();
 
                 //Logging data
-                dbHelper = new UserDBHelper(RecordingLifedataActivity.this);
                 db = dbHelper.getReadableDatabase();
                 Log.d(LOG_TAG, "--- Rows in Blood Pressure Data table: ---");
                 Cursor c = db.query(LifedataEntry.TABLE_NAME, null, null, null, null, null, null);

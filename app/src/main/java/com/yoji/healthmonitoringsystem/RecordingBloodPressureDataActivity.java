@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +25,33 @@ import java.util.Calendar;
 public class RecordingBloodPressureDataActivity extends AppCompatActivity {
 
     private static long userId;
+    private EditText systolicPressureEditText;
+    private EditText diastolicPressureEditText;
+    private EditText pulseEditText;
+    private CheckBox tachycardiaCheckBox;
+    private Button saveButton;
+    private UserDBHelper dbHelper;
+    private SQLiteDatabase db;
+
+    private TextWatcher textWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            String systolicPressure = systolicPressureEditText.getText().toString().trim();
+            String diastolicPressure = diastolicPressureEditText.getText().toString().trim();
+            String pulse = pulseEditText.getText().toString().trim();
+
+            saveButton.setEnabled(!systolicPressure.isEmpty() && !diastolicPressure.isEmpty()
+                    && !pulse.isEmpty());
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+        }
+    };
 
     public static void setUserId(long userId) {
         RecordingBloodPressureDataActivity.userId = userId;
@@ -34,6 +63,8 @@ public class RecordingBloodPressureDataActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recording_blood_pressure_data);
 
         recordingLifedataButtonInit();
+        initViews();
+        initDbHelper();
         saveButtonAction();
     }
 
@@ -50,17 +81,29 @@ public class RecordingBloodPressureDataActivity extends AppCompatActivity {
         });
     }
 
+    public void initViews (){
+        systolicPressureEditText = findViewById(R.id.systolicPressureEditTextId);
+        diastolicPressureEditText = findViewById(R.id.diastolicPressureEditTextId);
+        pulseEditText = findViewById(R.id.pulseEditTextId);
+        tachycardiaCheckBox = findViewById(R.id.tachycardiaCheckBoxId);
+
+        systolicPressureEditText.addTextChangedListener(textWatcher);
+        diastolicPressureEditText.addTextChangedListener(textWatcher);
+        pulseEditText.addTextChangedListener(textWatcher);
+    }
+
+    public void initDbHelper (){
+        dbHelper = new UserDBHelper(RecordingBloodPressureDataActivity.this);
+    }
+
     public void saveButtonAction() {
-        Button saveButton = findViewById(R.id.saveBloodPressureDataButtonId);
+        saveButton = findViewById(R.id.saveBloodPressureDataButtonId);
+
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final String LOG_TAG = "Logs";
                 Log.i(LOG_TAG, "Нажата кнопка \"Сохранить\" на экране записи показателей давления");
-                EditText systolicPressureEditText = findViewById(R.id.systolicPressureEditTextId);
-                EditText diastolicPressureEditText = findViewById(R.id.diastolicPressureEditTextId);
-                EditText pulseEditText = findViewById(R.id.pulseEditTextId);
-                CheckBox tachycardiaCheckBox = findViewById(R.id.tachycardiaCheckBoxId);
 
                 int systolicPressure = Integer.parseInt(systolicPressureEditText.getText().toString());
                 int diastolicPressure = Integer.parseInt(diastolicPressureEditText.getText().toString());
@@ -75,9 +118,8 @@ public class RecordingBloodPressureDataActivity extends AppCompatActivity {
                 pulseEditText.setText("");
                 tachycardiaCheckBox.setChecked(false);
 
-                UserDBHelper dbHelper = new UserDBHelper(RecordingBloodPressureDataActivity.this);
-                SQLiteDatabase db = dbHelper.getWritableDatabase();
 
+                db = dbHelper.getWritableDatabase();
                 ContentValues values = new ContentValues();
                 values.put(BloodPressureDataEntry.USER_ID, userId);
                 values.put(BloodPressureDataEntry.COLUMN_NAME_DATE_AND_TIME, currentTime);
@@ -85,12 +127,10 @@ public class RecordingBloodPressureDataActivity extends AppCompatActivity {
                 values.put(BloodPressureDataEntry.COLUMN_NAME_DIASTOLIC_PRESSURE, diastolicPressure);
                 values.put(BloodPressureDataEntry.COLUMN_NAME_PULSE, pulse);
                 values.put(BloodPressureDataEntry.COLUMN_NAME_TACHYCARDIA, tachycardia);
-
                 db.insert(BloodPressureDataEntry.TABLE_NAME, null, values);
                 db.close();
 
                 //Logging data
-                dbHelper = new UserDBHelper(RecordingBloodPressureDataActivity.this);
                 db = dbHelper.getReadableDatabase();
                 Log.d(LOG_TAG, "--- Rows in Blood Pressure Data table: ---");
                 Cursor c = db.query(BloodPressureDataEntry.TABLE_NAME, null, null, null, null, null, null);

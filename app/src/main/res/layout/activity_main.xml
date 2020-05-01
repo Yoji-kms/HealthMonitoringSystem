@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainConstraintLayoutId"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
@@ -52,7 +53,7 @@
         android:ems="10"
         android:hint="@string/surname"
         android:importantForAutofill="no"
-        android:inputType="textPersonName"
+        android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userNameTextViewId" />
 
@@ -64,10 +65,10 @@
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/name"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/surnameEditTextId"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/surnameEditTextId" />
 
     <EditText
         android:id="@+id/seccondNameEditTextId"
@@ -77,10 +78,10 @@
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/second_name"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameEditTextId"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/nameEditTextId" />
 
     <TextView
         android:id="@+id/ageTextViewId"
@@ -106,16 +107,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ageTextViewId" />
 
+
     <Button
         android:id="@+id/saveUserDataButtonId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
-        android:background="@android:drawable/progress_horizontal"
-        android:backgroundTint="@color/colorPrimary"
+        android:background="@drawable/button"
+        android:enabled="false"
         android:text="@string/save"
         android:textColor="@android:color/white"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ageEditTextId" />
+        app:layout_constraintTop_toBottomOf="@+id/ageEditTextId"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
