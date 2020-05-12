@@ -15,8 +15,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.yoji.healthmonitoringsystem.db.UserDBHelper;
-import com.yoji.healthmonitoringsystem.db.UserDataEntry;
+//import com.yoji.healthmonitoringsystem.db.UserDBHelper;
+//import com.yoji.healthmonitoringsystem.db.UserDataEntry;
 
 public class MainActivity extends AppCompatActivity {
     private Button saveButton;
@@ -24,8 +24,8 @@ public class MainActivity extends AppCompatActivity {
     private EditText nameEditText;
     private EditText secondNameEditText;
     private EditText ageEditText;
-    private UserDBHelper dbHelper;
-    private SQLiteDatabase db;
+//    private UserDBHelper dbHelper;
+//    private SQLiteDatabase db;
 
     private TextWatcher textWatcher = new TextWatcher() {
         @Override
@@ -54,12 +54,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initViews();
-        initDbHelper();
+//        initDbHelper();
+        initDb();
         saveButtonAction();
     }
 
-    public void initDbHelper (){
-        dbHelper = new UserDBHelper(MainActivity.this);
+//    public void initDbHelper (){
+//        dbHelper = new UserDBHelper(MainActivity.this);
+//    }
+
+    public void initDb (){
+
     }
 
     public void initViews (){
@@ -90,41 +95,41 @@ public class MainActivity extends AppCompatActivity {
                 int age = Integer.parseInt(ageEditText.getText().toString().trim());
 
                 //writing data to database
-                db = dbHelper.getWritableDatabase();
-                ContentValues values = new ContentValues();
-                values.put(UserDataEntry.COLUMN_NAME_USER_NAME, userName);
-                values.put(UserDataEntry.COLUMN_NAME_AGE, age);
-                long newRowId = db.insert(UserDataEntry.TABLE_NAME, null, values);
-                RecordingBloodPressureDataActivity.setUserId(newRowId);
-                RecordingLifedataActivity.setUserId(newRowId);
-                db.close();
+//                db = dbHelper.getWritableDatabase();
+//                ContentValues values = new ContentValues();
+//                values.put(UserDataEntry.COLUMN_NAME_USER_NAME, userName);
+//                values.put(UserDataEntry.COLUMN_NAME_AGE, age);
+//                long newRowId = db.insert(UserDataEntry.TABLE_NAME, null, values);
+//                RecordingBloodPressureDataActivity.setUserId(newRowId);
+//                RecordingLifedataActivity.setUserId(newRowId);
+//                db.close();
 
-                Toast.makeText(getApplicationContext(), R.string.data_saved, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), R.string.data_saved, Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(MainActivity.this, RecordingBloodPressureDataActivity.class);
                 startActivity(intent);
 
                 //Logging data from database
-                db = dbHelper.getReadableDatabase();
-                Log.d(LOG_TAG, "--- Rows in User Data table: ---");
-                Cursor c = db.query(UserDataEntry.TABLE_NAME, null, null, null, null, null, null);
-
-                if (c.moveToFirst()) {
-
-                    int idColIndex = c.getColumnIndex(UserDataEntry._ID);
-                    int userNameColIndex = c.getColumnIndex(UserDataEntry.COLUMN_NAME_USER_NAME);
-                    int ageColIndex = c.getColumnIndex(UserDataEntry.COLUMN_NAME_AGE);
-
-                    do {
-                        Log.d(LOG_TAG,
-                                "ID = " + c.getInt(idColIndex) +
-                                        ", name = " + c.getString(userNameColIndex) +
-                                        ", age = " + c.getInt(ageColIndex));
-                    } while (c.moveToNext());
-                } else
-                    Log.d(LOG_TAG, "0 rows");
-                c.close();
-                db.close();
+//                db = dbHelper.getReadableDatabase();
+//                Log.d(LOG_TAG, "--- Rows in User Data table: ---");
+//                Cursor c = db.query(UserDataEntry.TABLE_NAME, null, null, null, null, null, null);
+//
+//                if (c.moveToFirst()) {
+//
+//                    int idColIndex = c.getColumnIndex(UserDataEntry._ID);
+//                    int userNameColIndex = c.getColumnIndex(UserDataEntry.COLUMN_NAME_USER_NAME);
+//                    int ageColIndex = c.getColumnIndex(UserDataEntry.COLUMN_NAME_AGE);
+//
+//                    do {
+//                        Log.d(LOG_TAG,
+//                                "ID = " + c.getInt(idColIndex) +
+//                                        ", name = " + c.getString(userNameColIndex) +
+//                                        ", age = " + c.getInt(ageColIndex));
+//                    } while (c.moveToNext());
+//                } else
+//                    Log.d(LOG_TAG, "0 rows");
+//                c.close();
+//                db.close();
             }
         });
     }

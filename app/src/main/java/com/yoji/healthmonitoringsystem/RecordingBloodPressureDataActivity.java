@@ -30,8 +30,8 @@ public class RecordingBloodPressureDataActivity extends AppCompatActivity {
     private EditText pulseEditText;
     private CheckBox tachycardiaCheckBox;
     private Button saveButton;
-    private UserDBHelper dbHelper;
-    private SQLiteDatabase db;
+//    private UserDBHelper dbHelper;
+//    private SQLiteDatabase db;
 
     private TextWatcher textWatcher = new TextWatcher() {
         @Override
@@ -64,7 +64,7 @@ public class RecordingBloodPressureDataActivity extends AppCompatActivity {
 
         recordingLifedataButtonInit();
         initViews();
-        initDbHelper();
+//        initDbHelper();
         saveButtonAction();
     }
 
@@ -92,9 +92,9 @@ public class RecordingBloodPressureDataActivity extends AppCompatActivity {
         pulseEditText.addTextChangedListener(textWatcher);
     }
 
-    public void initDbHelper (){
-        dbHelper = new UserDBHelper(RecordingBloodPressureDataActivity.this);
-    }
+//    public void initDbHelper (){
+//        dbHelper = new UserDBHelper(RecordingBloodPressureDataActivity.this);
+//    }
 
     public void saveButtonAction() {
         saveButton = findViewById(R.id.saveBloodPressureDataButtonId);
@@ -119,45 +119,45 @@ public class RecordingBloodPressureDataActivity extends AppCompatActivity {
                 tachycardiaCheckBox.setChecked(false);
 
 
-                db = dbHelper.getWritableDatabase();
-                ContentValues values = new ContentValues();
-                values.put(BloodPressureDataEntry.USER_ID, userId);
-                values.put(BloodPressureDataEntry.COLUMN_NAME_DATE_AND_TIME, currentTime);
-                values.put(BloodPressureDataEntry.COLUMN_NAME_SYSTOLIC_PRESSURE, systolicPressure);
-                values.put(BloodPressureDataEntry.COLUMN_NAME_DIASTOLIC_PRESSURE, diastolicPressure);
-                values.put(BloodPressureDataEntry.COLUMN_NAME_PULSE, pulse);
-                values.put(BloodPressureDataEntry.COLUMN_NAME_TACHYCARDIA, tachycardia);
-                db.insert(BloodPressureDataEntry.TABLE_NAME, null, values);
-                db.close();
+//                db = dbHelper.getWritableDatabase();
+//                ContentValues values = new ContentValues();
+//                values.put(BloodPressureDataEntry.USER_ID, userId);
+//                values.put(BloodPressureDataEntry.COLUMN_NAME_DATE_AND_TIME, currentTime);
+//                values.put(BloodPressureDataEntry.COLUMN_NAME_SYSTOLIC_PRESSURE, systolicPressure);
+//                values.put(BloodPressureDataEntry.COLUMN_NAME_DIASTOLIC_PRESSURE, diastolicPressure);
+//                values.put(BloodPressureDataEntry.COLUMN_NAME_PULSE, pulse);
+//                values.put(BloodPressureDataEntry.COLUMN_NAME_TACHYCARDIA, tachycardia);
+//                db.insert(BloodPressureDataEntry.TABLE_NAME, null, values);
+//                db.close();
 
                 //Logging data
-                db = dbHelper.getReadableDatabase();
-                Log.d(LOG_TAG, "--- Rows in Blood Pressure Data table: ---");
-                Cursor c = db.query(BloodPressureDataEntry.TABLE_NAME, null, null, null, null, null, null);
-
-                if (c.moveToFirst()) {
-                    int idColIndex = c.getColumnIndex(BloodPressureDataEntry._ID);
-                    int userIdColIndex = c.getColumnIndex(BloodPressureDataEntry.USER_ID);
-                    int systolicPressureColIndex = c.getColumnIndex(BloodPressureDataEntry.COLUMN_NAME_SYSTOLIC_PRESSURE);
-                    int diastolicPressureColIndex = c.getColumnIndex(BloodPressureDataEntry.COLUMN_NAME_DIASTOLIC_PRESSURE);
-                    int pulseColIndex = c.getColumnIndex(BloodPressureDataEntry.COLUMN_NAME_PULSE);
-                    int tachycardiaColIndex = c.getColumnIndex(BloodPressureDataEntry.COLUMN_NAME_TACHYCARDIA);
-                    int dateAndTimeColIndex = c.getColumnIndex(BloodPressureDataEntry.COLUMN_NAME_DATE_AND_TIME);
-
-                    do {
-                        Log.d(LOG_TAG,
-                                "ID = " + c.getInt(idColIndex) +
-                                        ", user_id = " + c.getString(userIdColIndex) +
-                                        ", systolic_pressure = " + c.getInt(systolicPressureColIndex) +
-                                        ", diastolic_pressure = " + c.getInt(diastolicPressureColIndex) +
-                                        ", pulse = " + c.getInt(pulseColIndex) +
-                                        ", tachycardia = " + c.getInt(tachycardiaColIndex) +
-                                        ", current_time = " + c.getString(dateAndTimeColIndex));
-                    } while (c.moveToNext());
-                } else
-                    Log.d(LOG_TAG, "0 rows");
-                c.close();
-                db.close();
+//                db = dbHelper.getReadableDatabase();
+//                Log.d(LOG_TAG, "--- Rows in Blood Pressure Data table: ---");
+//                Cursor c = db.query(BloodPressureDataEntry.TABLE_NAME, null, null, null, null, null, null);
+//
+//                if (c.moveToFirst()) {
+//                    int idColIndex = c.getColumnIndex(BloodPressureDataEntry._ID);
+//                    int userIdColIndex = c.getColumnIndex(BloodPressureDataEntry.USER_ID);
+//                    int systolicPressureColIndex = c.getColumnIndex(BloodPressureDataEntry.COLUMN_NAME_SYSTOLIC_PRESSURE);
+//                    int diastolicPressureColIndex = c.getColumnIndex(BloodPressureDataEntry.COLUMN_NAME_DIASTOLIC_PRESSURE);
+//                    int pulseColIndex = c.getColumnIndex(BloodPressureDataEntry.COLUMN_NAME_PULSE);
+//                    int tachycardiaColIndex = c.getColumnIndex(BloodPressureDataEntry.COLUMN_NAME_TACHYCARDIA);
+//                    int dateAndTimeColIndex = c.getColumnIndex(BloodPressureDataEntry.COLUMN_NAME_DATE_AND_TIME);
+//
+//                    do {
+//                        Log.d(LOG_TAG,
+//                                "ID = " + c.getInt(idColIndex) +
+//                                        ", user_id = " + c.getString(userIdColIndex) +
+//                                        ", systolic_pressure = " + c.getInt(systolicPressureColIndex) +
+//                                        ", diastolic_pressure = " + c.getInt(diastolicPressureColIndex) +
+//                                        ", pulse = " + c.getInt(pulseColIndex) +
+//                                        ", tachycardia = " + c.getInt(tachycardiaColIndex) +
+//                                        ", current_time = " + c.getString(dateAndTimeColIndex));
+//                    } while (c.moveToNext());
+//                } else
+//                    Log.d(LOG_TAG, "0 rows");
+//                c.close();
+//                db.close();
             }
         });
     }

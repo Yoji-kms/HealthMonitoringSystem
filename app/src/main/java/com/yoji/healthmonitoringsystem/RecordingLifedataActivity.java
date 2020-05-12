@@ -27,8 +27,8 @@ public class RecordingLifedataActivity extends AppCompatActivity {
     private EditText weightEditText;
     private EditText quantityOfStepsEditText;
     private Button saveButton;
-    private UserDBHelper dbHelper;
-    private SQLiteDatabase db;
+//    private UserDBHelper dbHelper;
+//    private SQLiteDatabase db;
 
     private TextWatcher textWatcher = new TextWatcher() {
         @Override
@@ -58,7 +58,7 @@ public class RecordingLifedataActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recording_lifedata);
 
         initViews ();
-        initDbHelper();
+//        initDbHelper();
         recordingBloodPressureDataButtonInit();
         saveButtonAction();
     }
@@ -71,9 +71,9 @@ public class RecordingLifedataActivity extends AppCompatActivity {
         quantityOfStepsEditText.addTextChangedListener(textWatcher);
     }
 
-    public void initDbHelper (){
-        dbHelper = new UserDBHelper(RecordingLifedataActivity.this);
-    }
+//    public void initDbHelper (){
+//        dbHelper = new UserDBHelper(RecordingLifedataActivity.this);
+//    }
 
     public void recordingBloodPressureDataButtonInit() {
         Button recordingBloodPressureDataButton = findViewById(R.id.recordingBloodPressureButtonId);
@@ -106,39 +106,39 @@ public class RecordingLifedataActivity extends AppCompatActivity {
                 weightEditText.setText("");
                 quantityOfStepsEditText.setText("");
 
-                db = dbHelper.getWritableDatabase();
-                ContentValues values = new ContentValues();
-                values.put(LifedataEntry.USER_ID, userId);
-                values.put(LifedataEntry.COLUMN_NAME_WEIGHT, weight);
-                values.put(LifedataEntry.COLUMN_NAME_QUANTITY_OF_STEPS, quantityOfSteps);
-                values.put(LifedataEntry.COLUMN_NAME_DATE_AND_TIME, String.valueOf(currentTime));
-                db.insert(LifedataEntry.TABLE_NAME, null, values);
-                db.close();
+//                db = dbHelper.getWritableDatabase();
+//                ContentValues values = new ContentValues();
+//                values.put(LifedataEntry.USER_ID, userId);
+//                values.put(LifedataEntry.COLUMN_NAME_WEIGHT, weight);
+//                values.put(LifedataEntry.COLUMN_NAME_QUANTITY_OF_STEPS, quantityOfSteps);
+//                values.put(LifedataEntry.COLUMN_NAME_DATE_AND_TIME, String.valueOf(currentTime));
+//                db.insert(LifedataEntry.TABLE_NAME, null, values);
+//                db.close();
 
                 //Logging data
-                db = dbHelper.getReadableDatabase();
-                Log.d(LOG_TAG, "--- Rows in Blood Pressure Data table: ---");
-                Cursor c = db.query(LifedataEntry.TABLE_NAME, null, null, null, null, null, null);
-
-                if (c.moveToFirst()) {
-                    int idColIndex = c.getColumnIndex(LifedataEntry._ID);
-                    int userIdColIndex = c.getColumnIndex(LifedataEntry.USER_ID);
-                    int weightColIndex = c.getColumnIndex(LifedataEntry.COLUMN_NAME_WEIGHT);
-                    int quantityOfStepsColIndex = c.getColumnIndex(LifedataEntry.COLUMN_NAME_QUANTITY_OF_STEPS);
-                    int dateAndTimeColIndex = c.getColumnIndex(LifedataEntry.COLUMN_NAME_DATE_AND_TIME);
-
-                    do {
-                        Log.d(LOG_TAG,
-                                "ID = " + c.getInt(idColIndex) +
-                                        ", user_id = " + c.getString(userIdColIndex) +
-                                        ", weight = " + c.getInt(weightColIndex) +
-                                        ", quantity_of_steps = " + c.getInt(quantityOfStepsColIndex) +
-                                        ", current_time = " + c.getString(dateAndTimeColIndex));
-                    } while (c.moveToNext());
-                } else
-                    Log.d(LOG_TAG, "0 rows");
-                c.close();
-                db.close();
+//                db = dbHelper.getReadableDatabase();
+//                Log.d(LOG_TAG, "--- Rows in Blood Pressure Data table: ---");
+//                Cursor c = db.query(LifedataEntry.TABLE_NAME, null, null, null, null, null, null);
+//
+//                if (c.moveToFirst()) {
+//                    int idColIndex = c.getColumnIndex(LifedataEntry._ID);
+//                    int userIdColIndex = c.getColumnIndex(LifedataEntry.USER_ID);
+//                    int weightColIndex = c.getColumnIndex(LifedataEntry.COLUMN_NAME_WEIGHT);
+//                    int quantityOfStepsColIndex = c.getColumnIndex(LifedataEntry.COLUMN_NAME_QUANTITY_OF_STEPS);
+//                    int dateAndTimeColIndex = c.getColumnIndex(LifedataEntry.COLUMN_NAME_DATE_AND_TIME);
+//
+//                    do {
+//                        Log.d(LOG_TAG,
+//                                "ID = " + c.getInt(idColIndex) +
+//                                        ", user_id = " + c.getString(userIdColIndex) +
+//                                        ", weight = " + c.getInt(weightColIndex) +
+//                                        ", quantity_of_steps = " + c.getInt(quantityOfStepsColIndex) +
+//                                        ", current_time = " + c.getString(dateAndTimeColIndex));
+//                    } while (c.moveToNext());
+//                } else
+//                    Log.d(LOG_TAG, "0 rows");
+//                c.close();
+//                db.close();
             }
         });
     }
