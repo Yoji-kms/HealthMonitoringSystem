@@ -3,12 +3,12 @@ package com.yoji.healthmonitoringsystem.RoomDB;
 import androidx.room.Embedded;
 import androidx.room.Relation;
 
-public class LifedataToUserConnection {
+class BloodPressureOfUser {
     @Embedded
-    public UserData userDataTable;
+    UserData userData;
     @Relation(
-            parentColumn = "user_id",
+            parentColumn = "id",
             entityColumn = "user_id"
     )
-    public Lifedata lifedataTable;
+    BloodPressureData bloodPressureData;
 }

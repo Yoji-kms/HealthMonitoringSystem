@@ -1,7 +1,7 @@
 package com.yoji.healthmonitoringsystem.RoomDB;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
-import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
@@ -12,11 +12,8 @@ import java.util.List;
 public interface UserDataDAO {
 
     @Query("SELECT * FROM user_data")
-    List<UserData> getUsersData();
+    LiveData<List<UserData>> getUsersData();
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insertAll(UserData...usersData);
-
-    @Delete
-    void delete(UserData userData);
+    long insert(UserData userData);
 }

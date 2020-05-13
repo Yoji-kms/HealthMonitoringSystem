@@ -1,7 +1,7 @@
 package com.yoji.healthmonitoringsystem.RoomDB;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
-import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
@@ -11,13 +11,14 @@ import java.util.List;
 
 @Dao
 public interface BloodPressureDataDAO {
-    @Transaction
+
     @Query("SELECT * FROM blood_pressure_data")
-    List<BloodPressureData> getBloodPressureData();
+    LiveData<List<BloodPressureData>> getBloodPressureData();
+
+    @Transaction
+    @Query("SELECT * FROM user_data WHERE id IN (SELECT DISTINCT(user_id) FROM blood_pressure_data)")
+    LiveData<List<BloodPressureOfUser>> getBloodPressureOfUserData();
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insertAll(BloodPressureData...bloodPressureData);
-
-    @Delete
-    void delete(BloodPressureData bloodPressureData);
+    void insert(BloodPressureData bloodPressureData);
 }
