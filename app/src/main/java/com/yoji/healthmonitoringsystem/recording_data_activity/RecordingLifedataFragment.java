@@ -1,4 +1,4 @@
-package com.yoji.healthmonitoringsystem;
+package com.yoji.healthmonitoringsystem.recording_data_activity;
 
 import android.os.Bundle;
 
@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.yoji.healthmonitoringsystem.R;
 import com.yoji.healthmonitoringsystem.RoomDB.Lifedata;
 import com.yoji.healthmonitoringsystem.RoomDB.UserRepository;
 

@@ -1,4 +1,4 @@
-package com.yoji.healthmonitoringsystem;
+package com.yoji.healthmonitoringsystem.recording_data_activity;
 
 import android.os.Bundle;
 
@@ -15,6 +15,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.yoji.healthmonitoringsystem.R;
 import com.yoji.healthmonitoringsystem.RoomDB.BloodPressureData;
 import com.yoji.healthmonitoringsystem.RoomDB.UserRepository;
 

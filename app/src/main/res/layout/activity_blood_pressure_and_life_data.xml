@@ -3,13 +3,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".BloodPressureAndLifeDataActivity">
+    tools:context=".recording_data_activity.BloodPressureAndLifeDataActivity">
+
+    <TextView
+        android:id="@+id/titleTextViewId"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@color/design_default_color_background"
+        android:backgroundTint="@color/colorPrimary"
+        android:drawableStart="@drawable/logo"
+        android:paddingStart="0dp"
+        android:paddingEnd="0sp"
+        android:text="@string/title"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayoutId"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_purple"
+        app:tabSelectedTextColor="@android:color/white"
+        app:tabTextColor="@android:color/black">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"

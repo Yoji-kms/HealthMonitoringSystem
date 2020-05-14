@@ -10,9 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.Light.NoActionBar">
-        <activity android:name=".BloodPressureAndLifeDataActivity" />
-        <activity android:name=".RecordingLifedataActivity" />
-        <activity android:name=".RecordingBloodPressureDataActivity" />
+        <activity android:name=".recording_data_activity.BloodPressureAndLifeDataActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

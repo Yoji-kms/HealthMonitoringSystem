@@ -1,4 +1,4 @@
-package com.yoji.healthmonitoringsystem;
+package com.yoji.healthmonitoringsystem.recording_data_activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
@@ -6,6 +6,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
 
 import com.google.android.material.tabs.TabLayout;
+import com.yoji.healthmonitoringsystem.R;
 
 public class BloodPressureAndLifeDataActivity extends AppCompatActivity {
 

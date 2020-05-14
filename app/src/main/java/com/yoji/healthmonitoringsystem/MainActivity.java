@@ -11,6 +11,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.yoji.healthmonitoringsystem.recording_data_activity.BloodPressureAndLifeDataActivity;
+import com.yoji.healthmonitoringsystem.recording_data_activity.RecordingBloodPressureDataFragment;
+import com.yoji.healthmonitoringsystem.recording_data_activity.RecordingLifedataFragment;
 import com.yoji.healthmonitoringsystem.RoomDB.UserData;
 import com.yoji.healthmonitoringsystem.RoomDB.UserRepository;
 
