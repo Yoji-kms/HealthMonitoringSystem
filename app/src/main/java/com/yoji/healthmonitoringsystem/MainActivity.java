@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
             saveUserDataToDb();
 
-            Intent intent = new Intent(MainActivity.this, RecordingBloodPressureDataActivity.class);
+            Intent intent = new Intent(MainActivity.this, BloodPressureAndLifeDataActivity.class);
             startActivity(intent);
 
             logUserDataDb();
@@ -96,8 +96,8 @@ public class MainActivity extends AppCompatActivity {
         userData.setUserName(userName);
         userData.setAge(age);
         long userId = userRepository.insertUserData(userData);
-        RecordingLifedataActivity.setUserId(userId);
-        RecordingBloodPressureDataActivity.setUserId(userId);
+        RecordingBloodPressureDataFragment.setUserId(userId);
+        RecordingLifedataFragment.setUserId(userId);
 
         Toast.makeText(getApplicationContext(), R.string.data_saved, Toast.LENGTH_SHORT).show();
     }
