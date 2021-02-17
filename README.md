@@ -1,4 +1,4 @@
-# Нетология. Введение в Android. Урок 3
+# Нетология. Введение в Android. Урок 3 (Проектирование интерфейса)
 
 ## [Задание](https://github.com/netology-code/and-homeworks/tree/master/1.3.interface%26debug/1.3.1):
 
