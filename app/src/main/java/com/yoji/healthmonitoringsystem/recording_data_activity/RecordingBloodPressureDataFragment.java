@@ -20,7 +20,6 @@ import com.yoji.healthmonitoringsystem.RoomDB.BloodPressureData;
 import com.yoji.healthmonitoringsystem.RoomDB.UserRepository;
 
 import java.util.Calendar;
-import java.util.Objects;
 
 public class RecordingBloodPressureDataFragment extends Fragment {
     private View view;
@@ -33,9 +32,9 @@ public class RecordingBloodPressureDataFragment extends Fragment {
     private Button saveButton;
     private UserRepository userRepository;
 
-    private String LOG_TAG = "Logs";
+    private final String LOG_TAG = "Logs";
 
-    private TextWatcher textWatcher = new TextWatcher() {
+    private final TextWatcher textWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
         }
@@ -84,7 +83,7 @@ public class RecordingBloodPressureDataFragment extends Fragment {
     }
 
     private void initDb() {
-        userRepository = new UserRepository(Objects.requireNonNull(getActivity()).getApplication());
+        userRepository = new UserRepository(requireActivity().getApplication());
     }
 
     private void initViews() {
@@ -139,7 +138,7 @@ public class RecordingBloodPressureDataFragment extends Fragment {
 
     private void logBloodPressureDataDb() {
         Log.d(LOG_TAG, "--- Rows in Blood Pressure Data table: ---");
-        userRepository.getAllBloodPressureData().observe(this, allBloodPressureData -> {
+        userRepository.getAllBloodPressureData().observe(getViewLifecycleOwner(), allBloodPressureData -> {
             for (BloodPressureData bloodPressureData : allBloodPressureData) {
                 Log.d(LOG_TAG, "ID = " + bloodPressureData.getId() +
                         "; User ID = " + bloodPressureData.getUserId() +
